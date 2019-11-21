@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Text livesText;
     public Text finalText;
     public GameObject postProcessGameObject;
+    public GameObject fireworks;
 
     //private PostProcessVolume ppVolume;
     private int lives;

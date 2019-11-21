@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class TPlayerController : MonoBehaviour
 {
@@ -20,8 +21,15 @@ public class TPlayerController : MonoBehaviour
     private Animator heartAnimator2;
     public Image heart3;
     private Animator heartAnimator3;
+    public GameObject fireworks;
+
+    AudioSource audioSourceFootsteps, audioSourceJump;
+    public AudioSource audioSourcePickUp;
 
     public GameObject Ragdoll;
+
+    public AudioClip audioClipMusic1, audioClipMusic2, audioClipMusic3;
+    List<AudioSource> scArr = new List<AudioSource>();
     void Start()
     {
         count = 0;
@@ -47,11 +55,11 @@ public class TPlayerController : MonoBehaviour
         heartAnimator3 = heart3.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Explode(Vector3 position) {
+        GameObject firework = Instantiate(fireworks, position, Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
     }
+
     void setCountText()
     {
         countText.text = "Count: " + count.ToString();
@@ -98,7 +106,10 @@ public class TPlayerController : MonoBehaviour
             
             switch(lives)
             {
-                case 2: heartAnimator1.SetBool("flag", true);break;
+                case 2: 
+                    heartAnimator1.SetBool("flag", true);
+                    addDynamicMusic(audioClipMusic2, 0);
+                    break;
                 case 1: heartAnimator2.SetBool("flag", true); break;
                 case 0: heartAnimator3.SetBool("flag", true); break;
             }
@@ -107,7 +118,16 @@ public class TPlayerController : MonoBehaviour
             {
                 finalText.text = "Game Over";
                 removeAllObjecta();
+                Explode(transform.position);
                 addRagdoll();
+            }
+
+            if (count == 5) {
+                addDynamicMusic(audioClipMusic3, 1);
+            }
+
+            if (count == 8) {
+                addDynamicMusic(audioClipMusic1, 1);
             }
         }
     }
@@ -135,4 +155,37 @@ public class TPlayerController : MonoBehaviour
         }
     }
 
+    void audioFootSteps() {
+        if (CrossPlatformInputManager.GetButton("Vertical") || CrossPlatformInputManager.GetButton("Horizontal")) {
+            if (!audioSourceFootsteps.isPlaying) {
+                audioSourceFootsteps.Play();
+            }
+        }
+    }
+
+    void audioJump() {
+       if (CrossPlatformInputManager.GetButton("Jump")) {
+           audioSourceJump.Play();
+       }
+    }
+
+    void initDynamicMusic() {
+        for (int i = 0; i < 3; i++) {
+            AudioSource sc = gameObject.AddComponent<AudioSource>() as AudioSource;
+            sc.loop = true;
+            sc.volume = 0.4f;
+            scArr.Add(sc);
+        }
+    }
+
+    void addDynamicMusic(AudioClip audioClip, int index) {
+        scArr[index].Stop();
+        scArr[index].clip = audioClip;
+        scArr[index].Play();
+    }
+
+    void Update() {
+        audioFootSteps();
+        audioJump();
+    }
 }
