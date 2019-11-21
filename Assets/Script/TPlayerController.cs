@@ -23,8 +23,9 @@ public class TPlayerController : MonoBehaviour
     private Animator heartAnimator3;
     public GameObject fireworks;
 
-    AudioSource audioSourceFootsteps, audioSourceJump;
     public AudioSource audioSourcePickUp;
+    public AudioSource audioSourceFootsteps;
+    public AudioSource audioSourceJump;
 
     public GameObject Ragdoll;
 

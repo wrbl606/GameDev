@@ -258,6 +258,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 503349801}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &106221974 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 106221974, guid: 7cadffe976f91a04595b69fa5254567d,
+    type: 3}
+  m_PrefabInstance: {fileID: 503349801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &106221975 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 106221975, guid: 7cadffe976f91a04595b69fa5254567d,
+    type: 3}
+  m_PrefabInstance: {fileID: 503349801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +620,16 @@ PrefabInstance:
       propertyPath: audioClipMusic3
       value: 
       objectReference: {fileID: 8300000, guid: 06530ae2c09e9bb44ab70aa8aaca2705, type: 3}
+    - target: {fileID: 9096256579429457289, guid: 7cadffe976f91a04595b69fa5254567d,
+        type: 3}
+      propertyPath: audioSourceFootsteps
+      value: 
+      objectReference: {fileID: 106221975}
+    - target: {fileID: 9096256579429457289, guid: 7cadffe976f91a04595b69fa5254567d,
+        type: 3}
+      propertyPath: audioSourceJump
+      value: 
+      objectReference: {fileID: 106221974}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cadffe976f91a04595b69fa5254567d, type: 3}
 --- !u!1 &534669902
